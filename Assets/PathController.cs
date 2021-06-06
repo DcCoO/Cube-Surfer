@@ -6,6 +6,12 @@ public class PathController : SingletonMonoBehaviour<PathController>
     int currentPathIndex;
     public Path[] paths;
     
+    public void SetPath(Path[] paths)
+    {
+        this.paths = paths;
+        currentPath = paths[0];
+        currentPathIndex = 0;
+    }
 
     public void NextPath()
     {

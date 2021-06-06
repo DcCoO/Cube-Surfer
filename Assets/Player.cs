@@ -24,28 +24,16 @@ public class Player : SingletonMonoBehaviour<Player>
     float screenWidth;
     float mousePos;
     bool isFalling;
-    bool isStopped;
+    bool isStopped = true;
     PathController pathController;
 
     public Vector3 position => tf.position;
 
     void Start() => Reset();
-    
-
-    public void Reset()
-    {
-        pathController = PathController.Instance;
-        tf = transform;
-        tf.position = Vector3.up * yOrigin;
-        screenWidth = Screen.width;
-        height = yOrigin;
-        numCollectibles = 1;
-        for (int i = 1; i < collectibles.Length; ++i) collectibles[i].gameObject.SetActive(false);
-        UpdateBody();
-    }
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.S)) StartGame();
         if (isStopped) return;
 
         Vector3 right = Vector3.Cross(Vector3.up, pathController.currentPath.GetDirection(ref distanceTravelled));
@@ -70,9 +58,11 @@ public class Player : SingletonMonoBehaviour<Player>
         }
 
         Vector3 pathPosition = pathController.currentPath.GetPosition(ref distanceTravelled);
+        Quaternion pathRotation = pathController.currentPath.GetRotation(ref distanceTravelled);
         followedBody.position = pathPosition.SetY(yOrigin);
+        followedBody.rotation = pathRotation;
         tf.position = (pathPosition + right * sidePosition).SetY(height);
-        tf.rotation = pathController.currentPath.GetRotation(ref distanceTravelled);
+        tf.rotation = pathRotation;
         colliderBody.position = tf.position.SetY(yOrigin);
 
         if(pathController.currentPath.Finished(ref distanceTravelled)) ChangePart();
@@ -81,6 +71,18 @@ public class Player : SingletonMonoBehaviour<Player>
     }
 
     public void StartGame() => isStopped = false;
+
+    public void Reset()
+    {
+        pathController = PathController.Instance;
+        tf = transform;
+        tf.position = Vector3.up * yOrigin;
+        screenWidth = Screen.width;
+        height = yOrigin;
+        numCollectibles = 1;
+        for (int i = 1; i < collectibles.Length; ++i) collectibles[i].gameObject.SetActive(false);
+        UpdateBody();
+    }
 
     void UpdateBody() => playerBody.localPosition = (numCollectibles * ySize) * Vector3.up;
 

@@ -8,24 +8,29 @@ public class Path : MonoBehaviour
     [SerializeField] protected int angle;
     [SerializeField] protected Direction direction;
 
-    public Vector3 begin { get; private set; }
-    public Vector3 end { get; private set; }
+    [SerializeField] protected Transform begin;
+    [SerializeField] protected Transform end;
     
     private void Start()
     {
-        begin = pathCreator.path.GetPoint(0);
-        end = pathCreator.path.GetPoint(1);
         length = pathCreator.path.length;
     }
 
+    public Vector3 GetBegin() => begin.position;
+    public Vector3 GetEnd() => end.position;
+
     public void Place(Vector3 position, Direction direction)
     {
+        this.direction = direction;
         if (direction == Direction.NORTH) transform.eulerAngles = Vector3.zero;
         else if (direction == Direction.EAST) transform.eulerAngles = Vector3.up * 90;
         else if (direction == Direction.SOUTH) transform.eulerAngles = Vector3.up * 180;
         else transform.eulerAngles = Vector3.up * 270;
         transform.position = position;
+        length = pathCreator.path.length;
     }
+
+    public Direction GetNextDirection() => direction.Rotate(angle);
 
 
     public Vector3 GetPosition(ref float distanceTravelled) => pathCreator.path.GetPointAtDistance(distanceTravelled);
