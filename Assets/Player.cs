@@ -7,6 +7,7 @@ public class Player : SingletonMonoBehaviour<Player>
     [Header("References")]
     [SerializeField] protected Transform playerBody;
     [SerializeField] protected Transform colliderBody;
+    [SerializeField] protected Transform followedBody;
     [SerializeField] protected Transform[] collectibles;
 
     [Header("Physics")]
@@ -68,7 +69,9 @@ public class Player : SingletonMonoBehaviour<Player>
             }
         }
 
-        tf.position = (pathController.currentPath.GetPosition(ref distanceTravelled) + right * sidePosition).SetY(height);
+        Vector3 pathPosition = pathController.currentPath.GetPosition(ref distanceTravelled);
+        followedBody.position = pathPosition.SetY(yOrigin);
+        tf.position = (pathPosition + right * sidePosition).SetY(height);
         tf.rotation = pathController.currentPath.GetRotation(ref distanceTravelled);
         colliderBody.position = tf.position.SetY(yOrigin);
 
