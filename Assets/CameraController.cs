@@ -1,23 +1,30 @@
 using Cinemachine;
+using System.Collections;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
     [SerializeField] CinemachineMixingCamera mc;
-    void Start()
-    {
-        
-    }
+    [SerializeField] float transitionSpeed;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public void SetActiveCamera(int cameraIndex) => StartCoroutine(SetCameraRoutine(cameraIndex));    
 
-    public void SetActiveCamera(int cameraIndex)
+    IEnumerator SetCameraRoutine(float cameraIndex)
     {
-        mc.m_Weight0 = 1 - cameraIndex;
+        print("USING CAMERA " + cameraIndex);
+        for(float t = 0; t < 1; t += Time.deltaTime * transitionSpeed)
+        {
+            mc.m_Weight0 = (1 - t) * cameraIndex;
+            mc.m_Weight1 = t * cameraIndex;
+            yield return null;
+        }
+        mc.m_Weight0 = 1f - cameraIndex;
         mc.m_Weight1 = cameraIndex;
+
+        if (cameraIndex == 1)
+        {
+            yield return new WaitForSeconds(0.2f);
+            Player.Instance.StartGame();
+        }
     }
 }
