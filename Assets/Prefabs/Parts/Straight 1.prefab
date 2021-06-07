@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 3131292986695422673}
   - component: {fileID: 3131292986695422672}
   m_Layer: 0
-  m_Name: Part 1
+  m_Name: Straight 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -304,6 +304,8 @@ MonoBehaviour:
   - {fileID: 3131292987211083989}
   - {fileID: 3131292987994965587}
   height: 0100000001000000010000000100000001000000
+  left: {fileID: 3131292986637317532}
+  right: {fileID: 3131292987994965587}
 --- !u!65 &3131292986712203902
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -454,6 +456,8 @@ MonoBehaviour:
   - {fileID: 3131292986943020682}
   - {fileID: 3131292987530745680}
   height: 0100000000000000000000000100000002000000
+  left: {fileID: 3131292986632392330}
+  right: {fileID: 3131292987530745680}
 --- !u!65 &3131292986952263764
 BoxCollider:
   m_ObjectHideFlags: 0

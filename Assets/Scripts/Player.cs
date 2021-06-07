@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Player : SingletonMonoBehaviour<Player>, IReset
 {
-    [SerializeField] protected int numCollectibles;
 
     [Header("References")]
     [SerializeField] protected Transform playerBody;
@@ -27,6 +26,7 @@ public class Player : SingletonMonoBehaviour<Player>, IReset
     bool isStopped = true;
     PathController pathController;
 
+    public int numCollectibles { get; private set; }
     public Vector3 position => tf.position;
 
     void Start() => Reset();
@@ -65,18 +65,23 @@ public class Player : SingletonMonoBehaviour<Player>, IReset
         tf.rotation = pathRotation;
         colliderBody.position = tf.position.SetY(yOrigin);
 
-        if(pathController.currentPath.Finished(ref distanceTravelled)) ChangePart();
+        if(pathController.currentPath.Finished(ref distanceTravelled)) ChangePathPart();
         
         distanceTravelled += speed * Time.deltaTime;
     }
 
-    public void StartGame() => isStopped = false;
+    public void SetStopped(bool state) => isStopped = state;
 
     public void Reset()
     {
+        distanceTravelled = 0;
+        sidePosition = 0;
         pathController = PathController.Instance;
         tf = transform;
         tf.position = Vector3.up * yOrigin;
+        tf.rotation = Quaternion.identity;
+        followedBody.position = Vector3.up * yOrigin;
+        followedBody.rotation = Quaternion.identity;
         screenWidth = Screen.width;
         height = yOrigin;
         numCollectibles = 1;
@@ -92,7 +97,7 @@ public class Player : SingletonMonoBehaviour<Player>, IReset
         UpdateBody();
     }
 
-    void ChangePart()
+    void ChangePathPart()
     {
         distanceTravelled = 0;
         pathController.NextPath();
@@ -120,10 +125,19 @@ public class Player : SingletonMonoBehaviour<Player>, IReset
         isFalling = true;
     }
 
+    public void BreakAtLevel(int level)
+    {
+        collectibles[level].gameObject.SetActive(false);
+        GameObject explosion = PoolController.Instance.GetExplosion();
+        explosion.transform.position = collectibles[level].position;
+        explosion.GetComponent<ParticleSystem>().Play();
+    }
+
     public void StartHit(int obstacleHeight)
     {
         if(obstacleHeight >= numCollectibles)
         {
+            print("entrando aqui");
             EventController.Instance.OnGameOver();
             return;
         }

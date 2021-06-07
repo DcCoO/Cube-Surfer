@@ -2,7 +2,7 @@ using Cinemachine;
 using System.Collections;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
+public class CameraController : MonoBehaviour, IReset
 {
     [SerializeField] CinemachineMixingCamera mc;
     [SerializeField] float transitionSpeed;
@@ -11,7 +11,6 @@ public class CameraController : MonoBehaviour
 
     IEnumerator SetCameraRoutine(float cameraIndex)
     {
-        print("USING CAMERA " + cameraIndex);
         for(float t = 0; t < 1; t += Time.deltaTime * transitionSpeed)
         {
             mc.m_Weight0 = (1 - t) * cameraIndex;
@@ -24,7 +23,21 @@ public class CameraController : MonoBehaviour
         if (cameraIndex == 1)
         {
             yield return new WaitForSeconds(0.2f);
-            Player.Instance.StartGame();
+            Player.Instance.SetStopped(false);
+        }
+    }
+
+    public void Reset() => StartCoroutine(ResetRoutine());
+    
+
+    IEnumerator ResetRoutine()
+    {
+        foreach(CinemachineVirtualCamera vcam in mc.ChildCameras) vcam.gameObject.SetActive(false);
+        yield return new WaitForEndOfFrame();
+        foreach (CinemachineVirtualCamera vcam in mc.ChildCameras)
+        {
+            vcam.gameObject.SetActive(true);
+            vcam.PreviousStateIsValid = false;
         }
     }
 }

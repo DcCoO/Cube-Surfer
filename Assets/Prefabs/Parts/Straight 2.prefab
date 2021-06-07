@@ -566,7 +566,7 @@ GameObject:
   - component: {fileID: 3131292986695422673}
   - component: {fileID: 3131292986695422672}
   m_Layer: 0
-  m_Name: Part 4
+  m_Name: Straight 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -664,13 +664,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 716ab38ced5dd8740b6d83e9ec2e9063, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tracks:
-  - {fileID: 3131292986637317532}
-  - {fileID: 3131292987094986712}
-  - {fileID: 3131292988086888799}
-  - {fileID: 3131292987211083989}
-  - {fileID: 3131292987994965587}
   height: 0100000001000000010000000300000003000000
+  left: {fileID: 3131292986637317532}
+  right: {fileID: 3131292987994965587}
 --- !u!65 &3131292986712203902
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -741,13 +737,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 716ab38ced5dd8740b6d83e9ec2e9063, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tracks:
-  - {fileID: 3131292986632392330}
-  - {fileID: 5206965479391668038}
-  - {fileID: 4075556762592116815}
-  - {fileID: 4553139281292746}
-  - {fileID: 5632738179346342715}
   height: 0300000003000000030000000200000002000000
+  left: {fileID: 3131292986632392330}
+  right: {fileID: 5632738179346342715}
 --- !u!65 &6429378209843576050
 BoxCollider:
   m_ObjectHideFlags: 0

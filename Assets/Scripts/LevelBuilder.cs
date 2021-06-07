@@ -1,25 +1,17 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
-public class LevelBuilder : MonoBehaviour
+public class LevelBuilder : SingletonMonoBehaviour<LevelBuilder>, IReset
 {
     [SerializeField] GameObject[] parts;
     [SerializeField] Level[] levels;
-    int currentPart;
-    Transform tf;
-    
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A)) LoadLevel();
-    }
+    [SerializeField] List<IReset> resetables = new List<IReset>();
 
     public void LoadLevel(int levelIndex = 0)
     {
-        tf = transform;
-        currentPart = 0;
+        resetables.Clear();
+        Transform tf = transform;
         Path[] paths = new Path[levels[levelIndex].parts.Length];
         Level level = levels[levelIndex];
         Vector3 position = Vector3.zero;
@@ -33,4 +25,19 @@ public class LevelBuilder : MonoBehaviour
         }
         PathController.Instance.SetPath(paths);
     }
+
+    public void Reset()
+    {
+        resetables.ForEach(x => x.Reset());
+        StartCoroutine(MovePlayer());
+    }
+
+    IEnumerator MovePlayer()
+    {
+        yield return new WaitForSeconds(0.2f);
+        Player.Instance.SetStopped(false);
+    }
+
+    public void AddResetable(IReset resetable) => resetables.Add(resetable);
+
 }

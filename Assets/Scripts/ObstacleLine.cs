@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class ObstacleLine : MonoBehaviour
 {
-    [SerializeField] Transform[] tracks;
     [SerializeField] int[] height;
+    [SerializeField] Transform left, right;
 
     private void OnTriggerEnter(Collider other) => HitPlayer();
     private void OnTriggerExit(Collider other) => Player.Instance.EndHit();
@@ -11,9 +11,13 @@ public class ObstacleLine : MonoBehaviour
     void HitPlayer()
     {
         Vector3 playerPos = Player.Instance.position.Ground();
-
-        float[] dist = new float[5] { float.MaxValue, float.MaxValue, float.MaxValue, float.MaxValue, float.MaxValue } ;
-        for (int i = 0; i < 5; ++i) if(tracks[i] != null) dist[i] = Vector3.Distance(tracks[i].position.Ground(), playerPos);
+        Vector3 diff = right.position - left.position;
+        float[] dist = new float[5];
+        float rate = 0;
+        for (int i = 0; i < 5; ++i) {
+            dist[i] = Vector3.Distance((left.position + diff * rate).Ground(), playerPos);
+            rate += 0.2f;
+        }
         int min1 = (dist[0] < dist[1] ? 0 : 1);
         int min2 = 1 - min1;
         for (int i = 2; i < 5; ++i)
