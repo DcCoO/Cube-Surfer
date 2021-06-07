@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Player : SingletonMonoBehaviour<Player>
+public class Player : SingletonMonoBehaviour<Player>, IReset
 {
     [SerializeField] protected int numCollectibles;
 
@@ -33,7 +33,7 @@ public class Player : SingletonMonoBehaviour<Player>
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S)) StartGame();
+        if (Input.GetKeyDown(KeyCode.S)) FallInLava();
         if (isStopped) return;
 
         Vector3 right = Vector3.Cross(Vector3.up, pathController.currentPath.GetDirection(ref distanceTravelled));
@@ -98,6 +98,28 @@ public class Player : SingletonMonoBehaviour<Player>
         pathController.NextPath();
     }
 
+    public void FallInLava()
+    {
+        numCollectibles--;
+        if(numCollectibles == 0)
+        {
+            EventController.Instance.OnGameOver();
+            return;
+        }
+        
+        GameObject explosion = PoolController.Instance.GetExplosion();
+        explosion.transform.position = collectibles[0].position;
+        explosion.GetComponent<ParticleSystem>().Play();
+
+        for (int i = numCollectibles; i < collectibles.Length; ++i)
+        {
+            collectibles[i].gameObject.SetActive(false);
+        }
+        height = (yOrigin + 1 * ySize);
+        UpdateBody();
+        isFalling = true;
+    }
+
     public void StartHit(int obstacleHeight)
     {
         if(obstacleHeight >= numCollectibles)
@@ -106,7 +128,18 @@ public class Player : SingletonMonoBehaviour<Player>
             return;
         }
         numCollectibles -= obstacleHeight;
-        for (int i = numCollectibles; i < collectibles.Length; ++i) collectibles[i].gameObject.SetActive(false);
+
+        for(int i = 0; i < obstacleHeight; ++i)
+        {
+            GameObject explosion = PoolController.Instance.GetExplosion();
+            explosion.transform.position = collectibles[i].position;
+            explosion.GetComponent<ParticleSystem>().Play();
+        }
+
+        for (int i = numCollectibles; i < collectibles.Length; ++i)
+        {
+            collectibles[i].gameObject.SetActive(false);
+        }
         height = (yOrigin + obstacleHeight * ySize);
         UpdateBody();
     }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4117181296440989650}
   - component: {fileID: 5475458617959560913}
   - component: {fileID: 8483413858907516436}
+  - component: {fileID: 7302716733619657085}
   m_Layer: 0
   m_Name: Explosion
   m_TagString: Untagged
@@ -48,7 +49,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -4863,3 +4864,16 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &7302716733619657085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7919433780691833740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 977180b9a3dfac34d9531188935ce523, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolType: explosion

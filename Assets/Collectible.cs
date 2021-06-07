@@ -1,8 +1,11 @@
 using UnityEngine;
 
-public class Collectible : MonoBehaviour
+public class Collectible : MonoBehaviour, IReset
 {
     [SerializeField] int numCollectibles;
+
+    public void Reset() => gameObject.SetActive(true);
+    
 
     private void OnTriggerEnter(Collider other)
     {

@@ -1,7 +1,7 @@
 using PathCreation;
 using UnityEngine;
 
-public class Path : MonoBehaviour
+public class Path : MonoBehaviour, IReset
 {
     [SerializeField] protected PathCreator pathCreator;
     [SerializeField] protected float length;
@@ -10,6 +10,8 @@ public class Path : MonoBehaviour
 
     [SerializeField] protected Transform begin;
     [SerializeField] protected Transform end;
+
+    [SerializeField] IReset[] resetables;
     
     private void Start()
     {
@@ -38,4 +40,9 @@ public class Path : MonoBehaviour
     public Vector3 GetDirection(ref float distanceTravelled) => pathCreator.path.GetDirectionAtDistance(distanceTravelled);
     public bool Finished(ref float distanceTravelled) => Mathf.Abs(distanceTravelled - length) < 0.01f;
 
+    public void Reset()
+    {
+        gameObject.SetActive(true);
+        for (int i = 0; i < resetables.Length; ++i) resetables[i].Reset();
+    }
 }
