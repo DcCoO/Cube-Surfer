@@ -3,6 +3,7 @@ using UnityEngine.Events;
 
 public class EventController : SingletonMonoBehaviour<EventController>
 {
+    [SerializeField] UnityEvent onLoadLevel;
     [SerializeField] UnityEvent onStartGame;
     [SerializeField] UnityEvent onGameOver;
     [SerializeField] UnityEvent onVictory;

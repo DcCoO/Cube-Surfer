@@ -8,11 +8,7 @@ public class LevelBuilder : MonoBehaviour
     [SerializeField] Level[] levels;
     int currentPart;
     Transform tf;
-    // Start is called before the first frame update
-    void Start()
-    {
-        tf = transform;
-    }
+    
 
     // Update is called once per frame
     void Update()
@@ -22,6 +18,7 @@ public class LevelBuilder : MonoBehaviour
 
     public void LoadLevel(int levelIndex = 0)
     {
+        tf = transform;
         currentPart = 0;
         Path[] paths = new Path[levels[levelIndex].parts.Length];
         Level level = levels[levelIndex];
