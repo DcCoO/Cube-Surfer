@@ -7,6 +7,8 @@ public class UIController : MonoBehaviour
 {
     [Header("Menu References")]
     [SerializeField] TMP_Text diamondCountText;
+    [SerializeField] Button[] levelButtons;
+    [SerializeField] TMP_Text[] levelTexts;
 
     [Header("Win/Lose Shared References")]
     [SerializeField] Image background;
@@ -17,23 +19,43 @@ public class UIController : MonoBehaviour
 
     [Header("Win Screen References")]
     [SerializeField] string winText;
+    [SerializeField] string finishText;
     [SerializeField] RectTransform winDiamond;
     [SerializeField] TMP_Text winDiamondCountText;
 
     [Header("Lose Screen References")]    
     [SerializeField] string loseText;
 
-    private void Start() => UpdateDiamondsText();
-    public void UpdateDiamondsText() => diamondCountText.text = $"{MemoryController.Instance.diamonds}";    
+    private void Start() => UpdateMenu();
+    public void UpdateMenu()
+    {
+        diamondCountText.text = $"{MemoryController.Instance.diamonds}";
+        int lastOpenedLevel = MemoryController.Instance.lastOpenedLevel;
+        for(int i = 0, len = levelButtons.Length; i < len; ++i)
+        {
+            if (i <= lastOpenedLevel)
+            {
+                levelButtons[i].interactable = true;
+                levelTexts[i].text = $"{i + 1}";
+            }
+            else
+            {
+                levelButtons[i].interactable = false;
+                levelTexts[i].text = "-";
+            }
+        }
+    }
 
     public void WinGame() => StartCoroutine(EndGameRoutine(true));
     public void LoseGame() => StartCoroutine(EndGameRoutine(false));
 
     IEnumerator EndGameRoutine(bool win)
     {
+        bool isLastLevel = MemoryController.Instance.currentLevel == levelTexts.Length;
+
         //Reset all
         background.color = Color.clear;
-        endText.text = (win ? winText : loseText);
+        endText.text = (win ? (isLastLevel ? finishText : winText) : loseText);
         endText.rectTransform.localScale = Vector3.zero;
         nextButton.localScale = retryButton.localScale = Vector3.zero;
         homeButton.localScale = Vector3.zero;
@@ -62,7 +84,7 @@ public class UIController : MonoBehaviour
         RectTransform buttonRt = win ? nextButton : retryButton;
         for (float t = 0; t < 1; t += Time.deltaTime * 2f)
         {
-            buttonRt.localScale = t * Vector3.one;
+            if(!win || (win && !isLastLevel)) buttonRt.localScale = t * Vector3.one;
             homeButton.localScale = t * Vector3.one;
             if (win)
             {
@@ -71,7 +93,7 @@ public class UIController : MonoBehaviour
             }
             yield return null;
         }
-        buttonRt.localScale = Vector3.one;
+        if (!win || (win && !isLastLevel)) buttonRt.localScale = Vector3.one;
         homeButton.localScale = Vector3.one;
     }
 
