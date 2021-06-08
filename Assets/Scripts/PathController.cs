@@ -1,27 +1,28 @@
-using UnityEngine;
-
-public class PathController : SingletonMonoBehaviour<PathController>, IReset
+namespace CubeSurferClone
 {
-    public Path currentPath;
-    public int currentPathIndex;
-    public Path[] paths;
-
-    public void Reset()
+    public class PathController : SingletonMonoBehaviour<PathController>, IReset
     {
-        currentPathIndex = 0;
-        currentPath = paths[0];
-    }
+        public Path currentPath;
+        public int currentPathIndex;
+        public Path[] paths;
 
-    public void SetPath(Path[] paths)
-    {
-        this.paths = paths;
-        currentPath = paths[0];
-        currentPathIndex = 0;
-    }
+        public void Reset()
+        {
+            currentPathIndex = 0;
+            currentPath = paths[0];
+        }
 
-    public void NextPath()
-    {
-        currentPathIndex = (currentPathIndex + 1) % paths.Length;
-        currentPath = paths[currentPathIndex];
+        public void SetPath(Path[] paths)
+        {
+            this.paths = paths;
+            currentPath = paths[0];
+            currentPathIndex = 0;
+        }
+
+        public void NextPath()
+        {
+            currentPathIndex = (currentPathIndex + 1) % paths.Length;
+            currentPath = paths[currentPathIndex];
+        }
     }
 }

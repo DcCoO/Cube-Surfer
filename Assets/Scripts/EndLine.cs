@@ -1,6 +1,9 @@
 using UnityEngine;
 
-public class EndLine : MonoBehaviour
+namespace CubeSurferClone
 {
-    private void OnTriggerEnter(Collider other) => EventController.Instance.OnGameWin();    
+    public class EndLine : MonoBehaviour
+    {
+        private void OnTriggerEnter(Collider other) => EventController.Instance.OnGameWin();
+    }
 }

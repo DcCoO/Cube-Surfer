@@ -228,7 +228,19 @@ MonoBehaviour:
   levels:
   - {fileID: 11400000, guid: 21bcc729b1f6b704a864e075343be536, type: 2}
   - {fileID: 11400000, guid: 27cbfcbcb5e4ecd4ebf7b29d8543f008, type: 2}
-  - {fileID: 11400000, guid: 21bcc729b1f6b704a864e075343be536, type: 2}
+  - {fileID: 11400000, guid: 77cd360b2469bd144804d1ba99587e8a, type: 2}
+  - {fileID: 11400000, guid: 5140ed92559e39a449ad3089f2d23946, type: 2}
+  - {fileID: 11400000, guid: cc60f4560d319654a9a59629677064b5, type: 2}
+  - {fileID: 11400000, guid: db2fc1b1078ca4546850404f8994219d, type: 2}
+  - {fileID: 11400000, guid: 6cde4896c6ea04248bd70accc052cb45, type: 2}
+  - {fileID: 11400000, guid: e3a3abcb8d6ba0849b8cad11dae6e192, type: 2}
+  - {fileID: 11400000, guid: 1676d9aae1f7aec4e915a9b376671015, type: 2}
+  - {fileID: 11400000, guid: 58fec10698884e946b762306593e0096, type: 2}
+  - {fileID: 11400000, guid: 33c07e0c8f457494e85711f9aed81cff, type: 2}
+  - {fileID: 11400000, guid: 75da0858e834e5048a325d9164e818d1, type: 2}
+  - {fileID: 11400000, guid: 024ed3f75fdc48249b62bdf0e452c177, type: 2}
+  - {fileID: 11400000, guid: bd113d3ea65fc8e4cabfad05c6ce37a0, type: 2}
+  - {fileID: 11400000, guid: c05cb83cb4f65254ea1ea9111f9fe158, type: 2}
 --- !u!1 &52542112
 GameObject:
   m_ObjectHideFlags: 0
@@ -815,7 +827,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 239602254}
-  m_LocalRotation: {x: -0.028276946, y: 0.96981335, z: -0.13756976, w: -0.1993415}
+  m_LocalRotation: {x: -0.028276945, y: 0.96981335, z: -0.13756974, w: -0.1993415}
   m_LocalPosition: {x: -563.5925, y: -682.7359, z: 135.63611}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4714,26 +4726,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Audio Controller
       objectReference: {fileID: 0}
-    - target: {fileID: 4785809795166204743, guid: b18e24a63c812b441ab6703f0ae4bf65, type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5211205517662227905, guid: b18e24a63c812b441ab6703f0ae4bf65, type: 3}
-      propertyPath: hitSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 2a40b0a18b72a1548a117c1f45e9a9d3, type: 3}
-    - target: {fileID: 5211205517662227905, guid: b18e24a63c812b441ab6703f0ae4bf65, type: 3}
-      propertyPath: winSound
-      value: 
-      objectReference: {fileID: 8300000, guid: f4579c77300c85540873711738e79410, type: 3}
-    - target: {fileID: 5211205517662227905, guid: b18e24a63c812b441ab6703f0ae4bf65, type: 3}
-      propertyPath: diamondSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 60c29f68328392e4eba49488e1cb2ec5, type: 3}
-    - target: {fileID: 5211205517662227905, guid: b18e24a63c812b441ab6703f0ae4bf65, type: 3}
-      propertyPath: collectibleSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 0721124851f1c544295012c7efcef9e6, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b18e24a63c812b441ab6703f0ae4bf65, type: 3}
 --- !u!4 &1274896155 stripped
@@ -7694,7 +7686,7 @@ MonoBehaviour:
   nextButton: {fileID: 1771286870}
   retryButton: {fileID: 318571525}
   winText: You Won!
-  finishText: 
+  finishText: That' it! Congratulations!
   winDiamond: {fileID: 1446345032}
   winDiamondCountText: {fileID: 1268290496}
   loseText: You Failed
@@ -9128,7 +9120,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.93333334, b: 0.827451, a: 1}
-  m_Intensity: 2
+  m_Intensity: 0.77
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.802082
@@ -9173,7 +9165,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: -2.2127876e+27, z: 4.5905e-41, w: 14.959984}
+  m_BoundingSphereOverride: {x: 0, y: NaN, z: 0, w: -2.5042143e+27}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0

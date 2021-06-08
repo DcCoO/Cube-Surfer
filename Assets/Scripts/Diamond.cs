@@ -1,15 +1,18 @@
 using UnityEngine;
 
-public class Diamond : MonoBehaviour, IReset
+namespace CubeSurferClone
 {
-    private void Start() => LevelBuilder.Instance.AddResetable(this);
-    public void Reset() => gameObject.SetActive(true);    
-
-    private void OnTriggerEnter(Collider other)
+    public class Diamond : MonoBehaviour, IReset
     {
-        ScoreController.Instance.AddScore();
-        AudioController.Instance.PlayDiamond();
-        HudController.Instance.UpdateHUD();
-        gameObject.SetActive(false);
+        private void Start() => LevelBuilder.Instance.AddResetable(this);
+        public void Reset() => gameObject.SetActive(true);
+
+        private void OnTriggerEnter(Collider other)
+        {
+            ScoreController.Instance.AddScore();
+            AudioController.Instance.PlayDiamond();
+            HudController.Instance.UpdateHUD();
+            gameObject.SetActive(false);
+        }
     }
 }

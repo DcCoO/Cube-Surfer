@@ -45,6 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   source: {fileID: 4785809795166204743}
+  diamondSound: {fileID: 8300000, guid: 60c29f68328392e4eba49488e1cb2ec5, type: 3}
+  collectibleSound: {fileID: 8300000, guid: 0721124851f1c544295012c7efcef9e6, type: 3}
+  hitSound: {fileID: 8300000, guid: 2a40b0a18b72a1548a117c1f45e9a9d3, type: 3}
+  winSound: {fileID: 8300000, guid: f4579c77300c85540873711738e79410, type: 3}
+  lavaSound: {fileID: 8300000, guid: 2cd7b788a058fe64e94e42794e2072dc, type: 3}
 --- !u!82 &4785809795166204743
 AudioSource:
   m_ObjectHideFlags: 0
@@ -56,7 +61,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

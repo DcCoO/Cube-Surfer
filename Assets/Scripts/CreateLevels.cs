@@ -1,25 +1,28 @@
 using UnityEngine;
 using UnityEditor;
 
-public class CreateLevels
+namespace CubeSurferClone
 {
-    [MenuItem("Assets/Create/Procedural Level")]
-    public static void CreateLevel()
+    public class CreateLevels
     {
-        Level asset = ScriptableObject.CreateInstance<Level>();
+        [MenuItem("Assets/Create/Procedural Level")]
+        public static void CreateLevel()
+        {
+            Level asset = ScriptableObject.CreateInstance<Level>();
 
-        int numPaths = 5;
+            int numPaths = 5;
 
-        int numParts = Random.Range(6, 13);
-        asset.parts = new int[numParts];
-        asset.parts[numParts - 1] = 4;
-        for (int i = 0; i < numParts - 1; ++i) asset.parts[i] = Random.Range(0, numPaths);
+            int numParts = Random.Range(6, 13);
+            asset.parts = new int[numParts];
+            asset.parts[numParts - 1] = 5;
+            for (int i = 0; i < numParts - 1; ++i) asset.parts[i] = Random.Range(0, numPaths);
 
-        AssetDatabase.CreateAsset(asset, $"Assets/Prefabs/Levels/Level {Random.Range(0, 10000)}.asset");
-        AssetDatabase.SaveAssets();
+            AssetDatabase.CreateAsset(asset, $"Assets/Prefabs/Levels/Level {Random.Range(0, 10000)}.asset");
+            AssetDatabase.SaveAssets();
 
-        EditorUtility.FocusProjectWindow();
+            EditorUtility.FocusProjectWindow();
 
-        Selection.activeObject = asset;
+            Selection.activeObject = asset;
+        }
     }
 }

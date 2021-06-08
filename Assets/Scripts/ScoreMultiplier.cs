@@ -1,23 +1,26 @@
 using UnityEngine;
 
-public class ScoreMultiplier : MonoBehaviour
+namespace CubeSurferClone
 {
-    [SerializeField] int multiplier;
-    [SerializeField] int heightToBreak;
-
-    private void OnTriggerEnter(Collider other)
+    public class ScoreMultiplier : MonoBehaviour
     {
+        [SerializeField] int multiplier;
+        [SerializeField] int heightToBreak;
 
-        if(Player.Instance.numCollectibles >= heightToBreak + 2)
+        private void OnTriggerEnter(Collider other)
         {
-            Player.Instance.BreakAtLevel(heightToBreak);
-            ScoreController.Instance.SetMultiplier(multiplier);
-        }
-        else
-        {
-            AudioController.Instance.PlayHit();
-            EventController.Instance.OnGameWin();
-        }
 
+            if (Player.Instance.numCollectibles >= heightToBreak + 2)
+            {
+                Player.Instance.BreakAtLevel(heightToBreak);
+                ScoreController.Instance.SetMultiplier(multiplier);
+            }
+            else
+            {
+                AudioController.Instance.PlayHit();
+                EventController.Instance.OnGameWin();
+            }
+
+        }
     }
 }
