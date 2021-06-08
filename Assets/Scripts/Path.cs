@@ -36,7 +36,7 @@ namespace CubeSurferClone
         public Vector3 GetPosition(ref float distanceTravelled) => pathCreator.path.GetPointAtDistance(distanceTravelled);
         public Quaternion GetRotation(ref float distanceTravelled) => pathCreator.path.GetRotationAtDistance(distanceTravelled);
         public Vector3 GetDirection(ref float distanceTravelled) => pathCreator.path.GetDirectionAtDistance(distanceTravelled);
-        public bool Finished(ref float distanceTravelled) => Mathf.Abs(distanceTravelled - length) < 0.01f;
+        public bool Finished(ref float distanceTravelled) => Mathf.Abs(distanceTravelled - length) < 0.03f;
 
         public void Reset()
         {
