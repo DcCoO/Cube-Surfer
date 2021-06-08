@@ -25,7 +25,7 @@ public class MemoryController : SingletonMonoBehaviour<MemoryController>
     }
 
     public void SetCurrentLevel(int chosenLevel) => currentLevel = chosenLevel;
-    public void AddDiamonds(int diamonds) => this.diamonds += diamonds;    
+    public void UpdateDiamonds() => diamonds += ScoreController.Instance.currentScoreMultiplied;    
     public void WinLevel(int levelNumber) => lastOpenedLevel += (levelNumber == lastOpenedLevel ? 1 : 0);
     
 }

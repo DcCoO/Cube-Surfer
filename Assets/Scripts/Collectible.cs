@@ -10,6 +10,7 @@ public class Collectible : MonoBehaviour, IReset
     private void OnTriggerEnter(Collider other)
     {
         Player.Instance.Collect(numCollectibles);
+        AudioController.Instance.PlayCollectible();
         gameObject.SetActive(false);
     }
 }

@@ -15,6 +15,7 @@ public class ScoreMultiplier : MonoBehaviour
         }
         else
         {
+            AudioController.Instance.PlayHit();
             EventController.Instance.OnGameWin();
         }
 

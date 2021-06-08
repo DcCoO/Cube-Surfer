@@ -1,11 +1,17 @@
 using UnityEngine;
 
-public class PathController : SingletonMonoBehaviour<PathController>
+public class PathController : SingletonMonoBehaviour<PathController>, IReset
 {
     public Path currentPath;
-    int currentPathIndex;
+    public int currentPathIndex;
     public Path[] paths;
-    
+
+    public void Reset()
+    {
+        currentPathIndex = 0;
+        currentPath = paths[0];
+    }
+
     public void SetPath(Path[] paths)
     {
         this.paths = paths;

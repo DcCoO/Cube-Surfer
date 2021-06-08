@@ -10,6 +10,7 @@ public class LevelBuilder : SingletonMonoBehaviour<LevelBuilder>, IReset
 
     public void LoadLevel(int levelIndex = 0)
     {
+        MemoryController.Instance.SetCurrentLevel(levelIndex);
         resetables.Clear();
         ClearLevel();
         Transform tf = transform;
@@ -27,7 +28,7 @@ public class LevelBuilder : SingletonMonoBehaviour<LevelBuilder>, IReset
         PathController.Instance.SetPath(paths);
     }
 
-    public void LoadNextLevel() => LoadLevel(MemoryController.Instance.currentLevel);
+    public void LoadNextLevel() => LoadLevel(MemoryController.Instance.currentLevel + 1);
     
 
     public void Reset()

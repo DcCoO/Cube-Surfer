@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
+    [Header("Menu References")]
+    [SerializeField] TMP_Text diamondCountText;
 
     [Header("Win/Lose Shared References")]
     [SerializeField] Image background;
@@ -14,11 +16,15 @@ public class UIController : MonoBehaviour
     [SerializeField] RectTransform retryButton;
 
     [Header("Win Screen References")]
-    [SerializeField] string winText;    
+    [SerializeField] string winText;
+    [SerializeField] RectTransform winDiamond;
+    [SerializeField] TMP_Text winDiamondCountText;
 
     [Header("Lose Screen References")]    
     [SerializeField] string loseText;
 
+    private void Start() => UpdateDiamondsText();
+    public void UpdateDiamondsText() => diamondCountText.text = $"{MemoryController.Instance.diamonds}";    
 
     public void WinGame() => StartCoroutine(EndGameRoutine(true));
     public void LoseGame() => StartCoroutine(EndGameRoutine(false));
@@ -31,6 +37,11 @@ public class UIController : MonoBehaviour
         endText.rectTransform.localScale = Vector3.zero;
         nextButton.localScale = retryButton.localScale = Vector3.zero;
         homeButton.localScale = Vector3.zero;
+        winDiamond.localScale = Vector3.zero;
+        winDiamondCountText.rectTransform.localScale = Vector3.zero;
+        if (win) winDiamondCountText.text = 
+                $"{ScoreController.Instance.currentScore} x {ScoreController.Instance.multiplier} = {ScoreController.Instance.currentScoreMultiplied}";
+
 
 
         Color darkClear = new Color(0, 0, 0, 0.8f);
@@ -41,7 +52,7 @@ public class UIController : MonoBehaviour
         }
         background.color = darkClear;
         
-        for (float t = 0; t < 1; t += Time.deltaTime * 1.2f)
+        for (float t = 0; t < 1; t += Time.deltaTime * 1.6f)
         {
             endText.rectTransform.localScale = t * Vector3.one;
             yield return null;
@@ -49,10 +60,15 @@ public class UIController : MonoBehaviour
         endText.rectTransform.localScale = Vector3.one;
 
         RectTransform buttonRt = win ? nextButton : retryButton;
-        for (float t = 0; t < 1; t += Time.deltaTime * 1.2f)
+        for (float t = 0; t < 1; t += Time.deltaTime * 2f)
         {
             buttonRt.localScale = t * Vector3.one;
             homeButton.localScale = t * Vector3.one;
+            if (win)
+            {
+                winDiamond.localScale = t * Vector3.one;
+                winDiamondCountText.rectTransform.localScale = t * Vector3.one;
+            }
             yield return null;
         }
         buttonRt.localScale = Vector3.one;

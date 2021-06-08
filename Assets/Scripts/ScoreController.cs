@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ScoreController : SingletonMonoBehaviour<ScoreController>, IReset
-{
-    [SerializeField] int currentScore;
-    [SerializeField] int multiplier;
+{    
+    public int currentScore { get; private set; }
+    public int multiplier { get; private set; }
+
+    public int currentScoreMultiplied { get => currentScore * multiplier; }
 
     public void Reset()
     {

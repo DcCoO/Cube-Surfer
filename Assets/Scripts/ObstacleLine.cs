@@ -10,13 +10,13 @@ public class ObstacleLine : MonoBehaviour
     
     void HitPlayer()
     {
-        Vector3 playerPos = Player.Instance.position.Ground();
-        Vector3 diff = right.position - left.position;
+        Vector3 playerPos = Player.Instance.position;
         float[] dist = new float[5];
         float rate = 0;
         for (int i = 0; i < 5; ++i) {
-            dist[i] = Vector3.Distance((left.position + diff * rate).Ground(), playerPos);
-            rate += 0.2f;
+            dist[i] = Vector3.Distance(Vector3.Lerp(left.position, right.position, rate), playerPos);
+            Debug.DrawLine(playerPos, Vector3.Lerp(left.position, right.position, rate), Color.red);
+            rate += 0.25f;
         }
         int min1 = (dist[0] < dist[1] ? 0 : 1);
         int min2 = 1 - min1;

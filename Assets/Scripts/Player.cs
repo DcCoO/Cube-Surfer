@@ -28,12 +28,12 @@ public class Player : SingletonMonoBehaviour<Player>, IReset
 
     public int numCollectibles { get; private set; }
     public Vector3 position => tf.position;
+    public Vector3 bodyPosition => playerBody.position;
 
     void Start() => Reset();
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S)) FallInLava();
         if (isStopped) return;
 
         Vector3 right = Vector3.Cross(Vector3.up, pathController.currentPath.GetDirection(ref distanceTravelled));
@@ -129,6 +129,7 @@ public class Player : SingletonMonoBehaviour<Player>, IReset
     public void BreakAtLevel(int level)
     {
         collectibles[level].gameObject.SetActive(false);
+        AudioController.Instance.PlayHit();
         GameObject explosion = PoolController.Instance.GetExplosion();
         explosion.transform.position = collectibles[level].position;
         explosion.GetComponent<ParticleSystem>().Play();
@@ -136,9 +137,10 @@ public class Player : SingletonMonoBehaviour<Player>, IReset
 
     public void StartHit(int obstacleHeight)
     {
-        if(obstacleHeight >= numCollectibles)
+        AudioController.Instance.PlayHit();
+
+        if (obstacleHeight >= numCollectibles)
         {
-            print("entrando aqui");
             EventController.Instance.OnGameOver();
             return;
         }

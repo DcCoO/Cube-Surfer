@@ -7,7 +7,9 @@ public class Diamond : MonoBehaviour, IReset
 
     private void OnTriggerEnter(Collider other)
     {
-        //TODO: score
+        ScoreController.Instance.AddScore();
+        AudioController.Instance.PlayDiamond();
+        HudController.Instance.UpdateHUD();
         gameObject.SetActive(false);
     }
 }

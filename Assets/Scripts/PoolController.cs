@@ -6,12 +6,17 @@ public class PoolController : SingletonMonoBehaviour<PoolController>
 {
     [Header("Explosion Particle")]
     [SerializeField] GameObject explosionParticle;
+    [SerializeField] GameObject confettiParticle;
     Stack<GameObject> explosionPool = new Stack<GameObject>();
     [SerializeField] string explosionID;
 
     [Header("References")]
     [SerializeField] Transform levelParent;
-    
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.A)) Confetti();
+    }
     public void AddToPool(GameObject go, string objectType)
     {
         go.SetActive(false);
@@ -33,6 +38,8 @@ public class PoolController : SingletonMonoBehaviour<PoolController>
         poolable.PoolAfterSeconds(3);
         return go;
     }
+
+    public void Confetti() => Destroy(Instantiate(confettiParticle, Player.Instance.bodyPosition, confettiParticle.transform.rotation, levelParent), 4);    
 
     public void Reset()
     {
