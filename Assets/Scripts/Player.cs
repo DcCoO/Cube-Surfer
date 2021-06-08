@@ -77,6 +77,7 @@ public class Player : SingletonMonoBehaviour<Player>, IReset
         distanceTravelled = 0;
         sidePosition = 0;
         pathController = PathController.Instance;
+        collectibles[0].gameObject.SetActive(true);
         tf = transform;
         tf.position = Vector3.up * yOrigin;
         tf.rotation = Quaternion.identity;

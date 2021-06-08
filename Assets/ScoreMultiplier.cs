@@ -11,7 +11,7 @@ public class ScoreMultiplier : MonoBehaviour
         if(Player.Instance.numCollectibles >= heightToBreak + 2)
         {
             Player.Instance.BreakAtLevel(heightToBreak);
-            //change multiplier
+            ScoreController.Instance.SetMultiplier(multiplier);
         }
         else
         {

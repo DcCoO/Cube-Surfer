@@ -11,6 +11,7 @@ public class LevelBuilder : SingletonMonoBehaviour<LevelBuilder>, IReset
     public void LoadLevel(int levelIndex = 0)
     {
         resetables.Clear();
+        ClearLevel();
         Transform tf = transform;
         Path[] paths = new Path[levels[levelIndex].parts.Length];
         Level level = levels[levelIndex];
@@ -26,13 +27,24 @@ public class LevelBuilder : SingletonMonoBehaviour<LevelBuilder>, IReset
         PathController.Instance.SetPath(paths);
     }
 
+    public void LoadNextLevel() => LoadLevel(MemoryController.Instance.currentLevel);
+    
+
     public void Reset()
     {
         resetables.ForEach(x => x.Reset());
-        StartCoroutine(MovePlayer());
+        MovePlayer();
     }
 
-    IEnumerator MovePlayer()
+    public void ClearLevel()
+    {
+        var paths = GetComponentsInChildren<Path>();
+        for (int i = 0, len = paths.Length; i < len; ++i) Destroy(paths[i].gameObject);
+    }
+
+    public void MovePlayer() => StartCoroutine(MovePlayerRoutine());
+
+    IEnumerator MovePlayerRoutine()
     {
         yield return new WaitForSeconds(0.2f);
         Player.Instance.SetStopped(false);

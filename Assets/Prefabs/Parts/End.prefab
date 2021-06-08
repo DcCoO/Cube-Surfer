@@ -234,6 +234,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0843ef74ae298741808cf35f4f0c32a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  multiplier: 5
+  heightToBreak: 3
 --- !u!1 &745230494530312344
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,6 +345,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0843ef74ae298741808cf35f4f0c32a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  multiplier: 4
+  heightToBreak: 2
 --- !u!1 &1897578444260284621
 GameObject:
   m_ObjectHideFlags: 0
@@ -452,6 +456,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0843ef74ae298741808cf35f4f0c32a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  multiplier: 3
+  heightToBreak: 1
 --- !u!1 &2622035160965479176
 GameObject:
   m_ObjectHideFlags: 0
@@ -778,6 +784,7 @@ GameObject:
   - component: {fileID: 2732888509365277431}
   - component: {fileID: 8599781762652013918}
   - component: {fileID: 6358217922007035161}
+  - component: {fileID: 357965694892562118}
   m_Layer: 0
   m_Name: Ending
   m_TagString: Untagged
@@ -856,11 +863,23 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3685505372981037116}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 0.6223679}
+  m_Center: {x: 0, y: 0, z: 0.1888157}
+--- !u!114 &357965694892562118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3685505372981037116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8698429e385c0a48a4a170bbafae167, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3852539317080131494
 GameObject:
   m_ObjectHideFlags: 0
@@ -1389,6 +1408,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0843ef74ae298741808cf35f4f0c32a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  multiplier: 2
+  heightToBreak: 0
 --- !u!1 &8977263646488818619
 GameObject:
   m_ObjectHideFlags: 0
